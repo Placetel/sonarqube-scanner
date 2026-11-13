@@ -1,4 +1,4 @@
-FROM golang:1.20-alpine as build
+FROM golang:1.20-alpine@sha256:e47f121850f4e276b2b210c56df3fda9191278dd84a3a442bfe0b09934462a8f as build
 RUN apk add --no-cache --update git
 RUN mkdir -p /go/src/github.com/diegopereiraeng/harness-cie-sonarqube-scanner
 WORKDIR /go/src/github.com/diegopereiraeng/harness-cie-sonarqube-scanner 
@@ -13,7 +13,7 @@ RUN go get github.com/urfave/cli
 RUN go get github.com/joho/godotenv
 RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o harness-sonar
 
-FROM openjdk:11.0.16-jre
+FROM openjdk:11.0.16-jre@sha256:356949c3125c4fa8104745e7ea92bd995da4567634e6599b470d2f972d13e0e2
 
 ARG SONAR_VERSION=5.0.1.3006
 ARG SONAR_SCANNER_CLI=sonar-scanner-cli-${SONAR_VERSION}
